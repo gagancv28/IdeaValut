@@ -16,7 +16,7 @@ import { getApiBaseUrl } from "../utils/apiConfig";
 
 export default function FounderDashboard({ isMaintenance }) {
   const navigate = useNavigate();
-  const { planType, status, paymentStatus, payment_status, subscription_ends_at, expiryDate, requested_plan, verification_status, upgrade_status, suspension_reason } = useStartupPlan();
+  const { planType, status, paymentStatus, payment_status, subscription_ends_at, expiryDate, requested_plan, verification_status, upgrade_status, suspension_reason, approvalStatus, approval_status } = useStartupPlan();
   const isActive = status === "active" || paymentStatus === "paid" || payment_status === "paid";
   const [activeContactStartup, setActiveContactStartup] = useState(null);
   
@@ -1249,19 +1249,49 @@ export default function FounderDashboard({ isMaintenance }) {
                     </div>
                   </div>
                 </div>
-              ) : verification_status === "pending" ? (
+              ) : (approval_status === "pending" || verification_status === "pending" || status === "pending_verification") && !isActive ? (
                 <div className="flex items-center gap-3 p-4 bg-amber-50 border border-amber-500/20 rounded-2xl mb-4">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
                   </span>
                   <div>
-                    <h4 className="text-sm font-bold text-amber-700 uppercase tracking-wide">Upgrade Request Pending</h4>
-                    <p className="text-xs text-slate-600 mt-0.5">Your request to upgrade to {requested_plan || "Premium"} is under review by admin.</p>
+                    <h4 className="text-sm font-bold text-amber-700 uppercase tracking-wide">Pending Admin Approval</h4>
+                    <p className="text-xs text-slate-600 mt-0.5">Your profile is pending admin approval. You will be able to complete payment once approved.</p>
                   </div>
                 </div>
+              ) : (approval_status === "approved" || status === "pending_payment") && !isActive ? (
+                <div className="flex items-center justify-between gap-4 p-4 bg-emerald-50 border border-emerald-500/20 rounded-2xl flex-wrap mb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                    </span>
+                    <div>
+                      <h4 className="text-sm font-bold text-emerald-700 uppercase tracking-wide">Application Approved!</h4>
+                      <p className="text-xs text-slate-600 mt-0.5">Your application for {planType} has been approved by admin. Please complete payment to publish your profile.</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      if (isMaintenance) return;
+                      handleCheckout(planType || requested_plan || "Verified Pro", () => {
+                        toast.success("Payment verified! Your profile is now published.");
+                      });
+                    }}
+                    disabled={isMaintenance || isProcessing}
+                    className={`font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer ${
+                      isMaintenance 
+                        ? "bg-slate-200 text-slate-500 cursor-not-allowed opacity-50" 
+                        : "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-500/20"
+                    }`}
+                    title={isMaintenance ? "Payment disabled during system maintenance" : ""}
+                  >
+                    {isProcessing ? "Processing..." : `Pay Now — ${planType}`}
+                  </button>
+                </div>
               ) : isActive ? (
-                <div className="flex items-center gap-3 p-4 bg-emerald-50 border border-emerald-500/20 rounded-2xl">
+                <div className="flex items-center gap-3 p-4 bg-emerald-50 border border-emerald-500/20 rounded-2xl mb-4">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>

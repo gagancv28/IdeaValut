@@ -1421,7 +1421,7 @@
     "document_url": "",
     "document_urls": [],
     "id": 1784631470070,
-    "updated_at": "2026-08-18T14:46:42.206Z",
+    "updated_at": "2026-09-04T11:52:43.990Z",
     "public_document_url": "https://dcgsmnosupjtochqmmvk.supabase.co/storage/v1/object/public/documents/42d31fc6-e9a9-4a59-9fd8-113e837db951/1785066017568_hackthon_mail.pdf",
     "contact_email": "2102508567@svyasa-sas.edu.in",
     "phone_number": "9876543210",
@@ -1832,23 +1832,23 @@
     "logo_url": "https://dcgsmnosupjtochqmmvk.supabase.co/storage/v1/object/public/logos/logos/42d31fc6-e9a9-4a59-9fd8-113e837db951-1785391833072.png",
     "logoUrl": "https://dcgsmnosupjtochqmmvk.supabase.co/storage/v1/object/public/logos/logos/42d31fc6-e9a9-4a59-9fd8-113e837db951-1785391833072.png",
     "ai_insights": {
-      "score": 2,
-      "summary": "An early-revenue EdTech D2C startup seeking $50k in funding with minimal provided traction metrics.",
+      "score": 7,
+      "summary": "D2C  is building an interesting solution. Next-Gen Consumer Brand This is a demo analysis — add your GEMINI_API_KEY for AI-powered insights.",
       "strengths": [
-        "Early revenue generation indicates some initial product-market fit",
-        "Low funding ask of $50,000 makes it accessible for micro-VCs or angels"
+        "Clear value proposition and identifiable target market.",
+        "Strong foundational pitch structure."
       ],
       "risk_flags": [
-        "Extremely vague pitch and description lacking a clear value proposition",
-        "Contradiction between D2C consumer brand category and EdTech industry classification",
-        "Incomplete traction data (MRR value missing)"
+        "Requires further market validation.",
+        "Needs robust customer acquisition strategy."
       ],
       "recommended_sectors": [
         "EdTech",
-        "Direct-to-Consumer"
+        "SaaS",
+        "B2B"
       ],
-      "analyzed_at": "2026-09-04T04:50:31.510Z",
-      "model": "gemini-flash-lite-latest"
+      "analyzed_at": "2026-09-04T14:32:12.055Z",
+      "model": "mock-fallback"
     }
   },
   {
@@ -1890,8 +1890,8 @@
     "contact_email": "gaganstudy2428@gmail.com",
     "phone_number": "9876543210",
     "public_document_url": "https://dcgsmnosupjtochqmmvk.supabase.co/storage/v1/object/public/documents/be84b579-ef68-4239-92c5-5446e234943a/public_1785391075594_Gagan_CV_Internship.pdf",
-    "profile_views": 50,
-    "views": 50,
+    "profile_views": 59,
+    "views": 59,
     "events": [
       {
         "event_type": "view",
@@ -2184,10 +2184,66 @@
       {
         "event_type": "click",
         "created_at": "2026-08-19T13:06:09.765Z"
+      },
+      {
+        "event_type": "click",
+        "created_at": "2026-09-04T14:22:43.585Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:22:43.892Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:22:44.019Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:22:44.039Z"
+      },
+      {
+        "event_type": "click",
+        "created_at": "2026-09-04T14:23:30.757Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:23:30.796Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:23:30.894Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:23:30.927Z"
+      },
+      {
+        "event_type": "click",
+        "created_at": "2026-09-04T14:23:46.879Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:28:19.000Z"
+      },
+      {
+        "event_type": "click",
+        "created_at": "2026-09-04T14:28:19.082Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:28:19.182Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:28:19.202Z"
+      },
+      {
+        "event_type": "click",
+        "created_at": "2026-09-04T14:28:40.192Z"
       }
     ],
-    "outbound_clicks": 23,
-    "clicks": 23,
+    "outbound_clicks": 28,
+    "clicks": 28,
     "requested_plan": "Spotlight",
     "verification_status": "pending",
     "subscription_ends_at": "2027-02-15T12:05:56.635Z",
@@ -2356,7 +2412,47 @@
     },
     "pitch_deck_url": "",
     "id": 1787060322439,
-    "updated_at": "2026-08-18T13:38:42.440Z"
+    "updated_at": "2026-08-18T13:38:42.440Z",
+    "ai_insights": {
+      "score": 2,
+      "summary": "TestQueryCompany is an early-stage concept focused on verifying double submissions within AI/ML workflows.",
+      "strengths": [
+        "Identifies a specific technical edge case in data or transaction processing",
+        "Low initial capital requirement"
+      ],
+      "risk_flags": [
+        "Lack of detailed product architecture and defensible IP",
+        "Extremely narrow value proposition with unclear commercial viability"
+      ],
+      "recommended_sectors": [
+        "Developer Tools",
+        "Data Infrastructure"
+      ],
+      "analyzed_at": "2026-09-04T11:39:59.451Z",
+      "model": "gemini-flash-latest"
+    },
+    "outbound_clicks": 1,
+    "clicks": 1,
+    "events": [
+      {
+        "event_type": "click",
+        "created_at": "2026-09-04T14:25:46.265Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:25:46.511Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:25:46.705Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:25:46.775Z"
+      }
+    ],
+    "profile_views": 3,
+    "views": 3
   },
   {
     "company_name": "VerifyOnceCompany",
@@ -2605,5 +2701,79 @@
     ],
     "profile_views": 3,
     "views": 3
+  },
+  {
+    "company_name": "Ideavault",
+    "founder_name": "GAGAN C V",
+    "email": "cycle@gmail.com",
+    "website": "https://www.linkedin.com/in/gagan-cv-5b3b22369/",
+    "pitch": "Next-Gen Consumer Brand",
+    "industry": "FinTech",
+    "stage": "MVP",
+    "min_investment": 50000,
+    "description": "Zepto is a revolutionary Indian quick-commerce startup founded in 2021 by Stanford dropouts Aadit Palicha and Kaivalya Vohra. The company has transformed urban retail by delivering groceries, fresh produce, and daily essentials to customers' doors in 10 minutes or less. \n\nBy operating a hyper-local network of micro-warehouses—known as \"dark stores\"—strategically placed across major cities, Zepto optimizes packing and dispatch times down to the seconds. This tech-driven operational efficiency has made it a dominant player in India's digital economy, achieving unicorn status and securing billions in funding to expand its catalog into electronics, beauty, and household goods.",
+    "user_id": "6f3acc15-3d1b-41fa-b385-ef0a2740a2c0",
+    "status": "pending_verification",
+    "tier": "Basic",
+    "plan_type": "Verified Pro",
+    "additional_contacts": [],
+    "contact_info": {
+      "email": "2102508567@svyasa-sas.edu.in",
+      "phone": "123456789",
+      "additional": [],
+      "location": "Bangalore, Karnataka, India",
+      "teamSize": "80",
+      "traction": "70k",
+      "tags": "B2B"
+    },
+    "pitch_deck_url": "",
+    "id": 1788532592103,
+    "updated_at": "2026-09-04T14:37:10.151Z",
+    "payment_status": "paid",
+    "razorpay_order_id": "order_TXzkevJCUArwbj",
+    "razorpay_payment_id": "pay_TXzkpXOvfEUJKC",
+    "subscription_ends_at": "2027-03-03T14:37:10.150Z",
+    "verification_status": "pending",
+    "outbound_clicks": 1,
+    "clicks": 1,
+    "events": [
+      {
+        "event_type": "click",
+        "created_at": "2026-09-04T14:37:20.629Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:37:20.663Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:37:20.936Z"
+      },
+      {
+        "event_type": "view",
+        "created_at": "2026-09-04T14:37:20.960Z"
+      }
+    ],
+    "profile_views": 3,
+    "views": 3,
+    "ai_insights": {
+      "score": 2,
+      "summary": "Ideavault claims to be an MVP-stage consumer brand and FinTech platform, but presents a profile identical to the established quick-commerce delivery giant Zepto.",
+      "strengths": [
+        "Targets the high-growth, high-demand urban quick-commerce and daily essentials market",
+        "Conceptual framework utilizes a proven dark-store micro-warehouse logistics model"
+      ],
+      "risk_flags": [
+        "Severe integrity concern: the profile directly copies the founding story, operations, and milestones of existing unicorn Zepto",
+        "Critical inconsistencies across metadata: listed as FinTech at MVP stage with a $50k ask, directly contradicting a capital-intensive dark store logistics network"
+      ],
+      "recommended_sectors": [
+        "Quick Commerce",
+        "E-commerce & Retail Tech",
+        "Supply Chain & Logistics"
+      ],
+      "analyzed_at": "2026-09-04T14:38:19.063Z",
+      "model": "gemini-flash-latest"
+    }
   }
 ]

@@ -52,7 +52,7 @@ const PLANS = [
 
 export default function SubscriptionPage() {
   const navigate = useNavigate();
-  const { planType, status, paymentStatus, payment_status, expiryDate, loading: planLoading, invalidate } = useStartupPlan();
+  const { planType, status, paymentStatus, payment_status, expiryDate, loading: planLoading, invalidate, approvalStatus, approval_status } = useStartupPlan();
   const isActive = status === "active" || paymentStatus === "paid" || payment_status === "paid";
 
   const [currency, setCurrency] = useState("INR"); // INR or USD
@@ -333,52 +333,90 @@ export default function SubscriptionPage() {
                     </div>
 
                     {/* CTA */}
-                    <div className="pt-6 mt-auto">
+                    <div className="pt-6 mt-auto space-y-3">
                       {(() => {
                         const isActivePlan = planType === plan.id && isActive;
-                        const isPendingApproval = status === "pending_verification" && (planType === plan.id || plan.id !== "Basic");
-                        const isPendingPayment = planType === plan.id && status === "pending_payment";
-                        const isDisabled = isActivePlan || isPendingApproval || submitting || isMaintenance;
+                        const isApproved = approval_status === "approved" || status === "pending_payment" || status === "approved";
+                        const isPendingApproval = (planType === plan.id || plan.id !== "Basic") && (!isApproved && (status === "pending_verification" || status === "pending" || approval_status === "pending"));
+                        const isUnlockedForPayment = isApproved && !isActivePlan && plan.id !== "Basic";
 
-                        let btnText = `Upgrade to ${plan.name}`;
+                        let btnText = `Request Upgrade to ${plan.name}`;
                         if (isMaintenance) {
                           btnText = "Paused for Maintenance";
                         } else if (isActivePlan) {
                           btnText = "✓ Current Plan";
                         } else if (isPendingApproval) {
-                          btnText = "Submitted for Admin Approval";
-                        } else if (isPendingPayment) {
-                          btnText = "Approved - Pay via QR";
+                          btnText = "Pending Admin Approval";
+                        } else if (isUnlockedForPayment) {
+                          btnText = `Pay Now — ${plan.name}`;
+                        } else if (plan.id === "Basic") {
+                          btnText = "Switch to Basic";
                         }
 
+                        const isDisabled = isActivePlan || (isPendingApproval && !isUnlockedForPayment) || submitting || isMaintenance;
+
                         return (
-                          <button
-                            disabled={isDisabled}
-                            onClick={() => {
-                              if (plan.id === "Basic") {
-                                // Basic plan just sets status locally
-                                handleCheckout("Basic", () => {
-                                  setLocalToast({ message: "Payment successful! Your startup is now live on the Basic plan.", type: "success" });
-                                });
-                              } else {
-                                // For paid tiers, call Razorpay checkout
-                                handleCheckout(plan.id, () => {
-                                  setLocalToast({ message: `Your upgrade to ${plan.id} is complete.`, type: "success" });
-                                });
-                              }
-                            }}
-                            className={`w-full py-3.5 rounded-xl font-bold text-sm transition-all duration-200 flex items-center justify-center gap-2 ${
-                              isDisabled
-                                ? "bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200"
-                                : isSpotlight
-                                ? "bg-amber-500 hover:bg-amber-400 text-white shadow-lg shadow-amber-500/20 cursor-pointer active:scale-[0.98]"
-                                : isVerified
-                                ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/20 cursor-pointer active:scale-[0.98]"
-                                : "bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 cursor-pointer active:scale-[0.98]"
-                            }`}
-                          >
-                            {btnText}
-                          </button>
+                          <>
+                            {isPendingApproval && !isApproved && plan.id !== "Basic" && (
+                              <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-left space-y-1">
+                                <p className="text-[11px] font-bold text-amber-700 uppercase tracking-wider flex items-center gap-1">
+                                  <Clock className="w-3.5 h-3.5" /> Pending Approval
+                                </p>
+                                <p className="text-[11px] text-slate-600 leading-snug">
+                                  Your profile is pending admin approval. You will be able to complete payment once approved.
+                                </p>
+                              </div>
+                            )}
+
+                            <button
+                              disabled={isDisabled}
+                              onClick={async () => {
+                                if (plan.id === "Basic") {
+                                  handleCheckout("Basic", () => {
+                                    setLocalToast({ message: "Activated Basic plan.", type: "success" });
+                                  });
+                                  return;
+                                }
+
+                                if (isUnlockedForPayment) {
+                                  // Razorpay payment button unlocked ONLY when approval_status === 'approved'
+                                  handleCheckout(plan.id, () => {
+                                    setLocalToast({ message: `Your payment for ${plan.id} was successful!`, type: "success" });
+                                  });
+                                } else {
+                                  // Request approval from admin
+                                  const session = JSON.parse(sessionStorage.getItem("ideavault_user") || "null");
+                                  if (!session?.userId) return;
+                                  try {
+                                    const res = await fetch(`${getApiBaseUrl()}/api/startups/${session.userId}/upgrade-request`, {
+                                      method: "POST",
+                                      headers: { "Content-Type": "application/json" },
+                                      body: JSON.stringify({ tier: plan.id })
+                                    });
+                                    if (res.ok) {
+                                      invalidate();
+                                      setLocalToast({ message: `Upgrade request for ${plan.name} submitted for admin review!`, type: "success" });
+                                    }
+                                  } catch (e) {
+                                    setLocalToast({ message: "Failed to submit upgrade request.", type: "error" });
+                                  }
+                                }
+                              }}
+                              className={`w-full py-3.5 rounded-xl font-bold text-sm transition-all duration-200 flex items-center justify-center gap-2 ${
+                                isDisabled
+                                  ? "bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200"
+                                  : isUnlockedForPayment
+                                  ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 cursor-pointer active:scale-[0.98]"
+                                  : isSpotlight
+                                  ? "bg-amber-500 hover:bg-amber-400 text-white shadow-lg shadow-amber-500/20 cursor-pointer active:scale-[0.98]"
+                                  : isVerified
+                                  ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/20 cursor-pointer active:scale-[0.98]"
+                                  : "bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 cursor-pointer active:scale-[0.98]"
+                              }`}
+                            >
+                              {btnText}
+                            </button>
+                          </>
                         );
                       })()}
                     </div>

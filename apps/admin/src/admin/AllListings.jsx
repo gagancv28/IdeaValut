@@ -300,19 +300,21 @@ function getCalculatedExpiry(startDateStr) {
         ...(Array.isArray(existingAC) ? { links: existingAC } : existingAC),
         tier: targetPlan,
         plan_type: targetPlan,
+        approval_status: "approved",
+        verification_status: "approved",
         approved_by: activeAdminName,
         expiry_date: expiryIso,
         subscription_ends_at: expiryIso
       };
 
       const payload = {
-        status: "active",
-        payment_status: "paid",
+        status: "pending_payment",
+        approval_status: "approved",
+        verification_status: "approved",
         subscription_ends_at: expiryIso,
         expiry_date: expiryIso,
         plan_type: targetPlan,
         requested_plan: null,
-        verification_status: "approved",
         approved_by: activeAdminName,
         additional_contacts: updatedAC
       };

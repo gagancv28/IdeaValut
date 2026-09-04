@@ -5,7 +5,7 @@ import { signupFounder } from "../services/api";
 import {
   CheckCircle2, Star, Zap, Shield, Upload, ChevronRight, ChevronDown,
   Building2, FileText, IndianRupee, ArrowRight, Sparkles, Users, Target, TrendingUp,
-  MapPin, Globe, Loader2, Lock, AlertCircle, UserCheck
+  MapPin, Globe, Loader2, Lock, AlertCircle, UserCheck, Clock
 } from "lucide-react";
 import { getApiBaseUrl } from "../utils/apiConfig";
 import { useRazorpayCheckout } from "../hooks/useRazorpayCheckout";
@@ -772,47 +772,53 @@ export default function OnboardingPage({ user, onOpenSignup, onOpenLogin }) {
             </p>
           </div>
 
-          {/* Checkout Info Box */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-left space-y-4 shadow-xl">
-            <div className="flex justify-between items-center pb-3 border-b border-slate-800">
-              <span className="text-sm font-semibold text-slate-400">Subscription Plan</span>
-              <span className="text-sm font-bold text-slate-100 uppercase tracking-wide">{planInfo?.name}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-semibold text-slate-400">Visibility Status</span>
-              <span className="text-xs px-2.5 py-0.5 bg-amber-500/10 text-amber-500 border border-amber-500/20 font-bold rounded-full uppercase">Pending Payment</span>
-            </div>
-            <div className="flex justify-between items-center pt-3 border-t border-slate-800">
-              <span className="text-base font-bold text-slate-100">Amount Due</span>
-              <span className="text-xl font-extrabold text-indigo-400">{priceDisplay}</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <button
-              onClick={() => {
-                const planId = selectedPlan === "verified" ? "Verified Pro" : selectedPlan === "spotlight" ? "Spotlight" : "Basic";
-                if (planId === "Basic") {
-                  handleCheckout(planId, () => {
+          {/* Pending Approval / Payment Box */}
+          {selectedPlan === "basic" ? (
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-left space-y-4 shadow-xl">
+              <div className="flex justify-between items-center pb-3 border-b border-slate-800">
+                <span className="text-sm font-semibold text-slate-400">Subscription Plan</span>
+                <span className="text-sm font-bold text-slate-100 uppercase tracking-wide">{planInfo?.name}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-semibold text-slate-400">Visibility Status</span>
+                <span className="text-xs px-2.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold rounded-full uppercase">Free Plan</span>
+              </div>
+              <div className="flex flex-col gap-3 pt-4">
+                <button
+                  onClick={() => {
                     window.dispatchEvent(new CustomEvent("startups-updated"));
                     navigate("/dashboard");
-                  });
-                } else {
-                  handleCheckout(planId, () => {
+                  }}
+                  className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-indigo-600/25 cursor-pointer transform active:scale-95"
+                >
+                  Go to Founder Dashboard
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-6 text-left space-y-4 shadow-xl">
+              <div className="flex items-center gap-3 text-amber-600">
+                <Clock className="w-6 h-6 shrink-0" />
+                <div>
+                  <h3 className="font-bold text-sm text-amber-500 uppercase tracking-wide">Pending Admin Approval</h3>
+                  <p className="text-xs text-amber-400 mt-1 leading-relaxed">
+                    Your profile is pending admin approval. You will be able to complete payment once approved.
+                  </p>
+                </div>
+              </div>
+              <div className="pt-2">
+                <button
+                  onClick={() => {
                     window.dispatchEvent(new CustomEvent("startups-updated"));
                     navigate("/dashboard");
-                  });
-                }
-              }}
-              disabled={isProcessing}
-              className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-indigo-600/25 cursor-pointer transform active:scale-95 disabled:opacity-75"
-            >
-              {isProcessing ? "Processing..." : "Secure Checkout & Activate Listing"}
-            </button>
-            <p className="text-[10px] text-slate-500">
-              By continuing, you agree to our 180-day visibility policy. Secure processing powered by Razorpay.
-            </p>
-          </div>
+                  }}
+                  className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-all cursor-pointer shadow-md"
+                >
+                  Go to Founder Dashboard
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );

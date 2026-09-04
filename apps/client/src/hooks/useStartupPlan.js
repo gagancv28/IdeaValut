@@ -11,6 +11,7 @@ export function useStartupPlan() {
   const [planType, setPlanType]           = useState("Basic");
   const [status, setStatus]               = useState("pending");
   const [paymentStatus, setPaymentStatus] = useState("pending");
+  const [approvalStatus, setApprovalStatus] = useState("pending");
   const [expiryDate, setExpiryDate]       = useState(null);
   const [requestedPlan, setRequestedPlan] = useState(null);
   const [verificationStatus, setVerificationStatus] = useState(null);
@@ -43,14 +44,17 @@ export function useStartupPlan() {
           // Normalize "Verified" → "Verified Pro"
           const cleanTier = rawTier === "Verified" ? "Verified Pro" : rawTier;
 
-          // DB value for status — if column doesn't exist the server returns undefined/null
-          // Fall back to sessionStorage value so mock payment updates show immediately
           const dbStatus = data.startup.status;
           const dbPaymentStatus = data.startup.payment_status || data.startup.paymentStatus;
           const dbExpiry = data.startup.subscription_ends_at || data.startup.subscriptionEndsAt || data.startup.expiryDate || data.startup.expiry_date;
 
           const resolvedStatus = dbStatus || cachedProfile?.status || "pending";
           const resolvedPaymentStatus = dbPaymentStatus || cachedProfile?.payment_status || cachedProfile?.paymentStatus || (resolvedStatus === "active" ? "paid" : "pending");
+          
+          // Determine approvalStatus (approved if status is active or approved, or verification_status is approved)
+          const dbApproval = data.startup.approval_status || data.startup.approvalStatus || data.startup.verification_status || cachedProfile?.approval_status || cachedProfile?.verification_status;
+          const resolvedApprovalStatus = dbApproval || (resolvedStatus === "active" || resolvedStatus === "approved" || dbStatus === "pending_payment" ? "approved" : "pending");
+
           let resolvedExpiry = dbExpiry || cachedProfile?.subscription_ends_at || cachedProfile?.subscriptionEndsAt || cachedProfile?.expiryDate || null;
           
           if ((resolvedStatus === "active" || resolvedPaymentStatus === "paid") && !resolvedExpiry) {
@@ -67,17 +71,13 @@ export function useStartupPlan() {
           setPlanType(resolvedTier);
           setStatus(resolvedStatus);
           setPaymentStatus(resolvedPaymentStatus);
+          setApprovalStatus(resolvedApprovalStatus);
           setExpiryDate(resolvedExpiry);
           setRequestedPlan(data.startup.requested_plan || cachedProfile?.requested_plan || null);
           const resVerStatus = data.startup.verification_status || data.startup.additional_contacts?.verification_status || cachedProfile?.verification_status || null;
           const resUpgradeStatus = data.startup.upgrade_status || data.startup.additional_contacts?.upgrade_status || cachedProfile?.upgrade_status || null;
           const resReason = data.startup.suspension_reason || data.startup.additional_contacts?.suspension_reason || cachedProfile?.suspension_reason || null;
 
-          setPlanType(resolvedTier);
-          setStatus(resolvedStatus);
-          setPaymentStatus(resolvedPaymentStatus);
-          setExpiryDate(resolvedExpiry);
-          setRequestedPlan(data.startup.requested_plan || cachedProfile?.requested_plan || null);
           setVerificationStatus(resVerStatus);
           setUpgradeStatus(resUpgradeStatus);
           setSuspensionReason(resReason);
@@ -90,6 +90,8 @@ export function useStartupPlan() {
             status: resolvedStatus,
             payment_status: resolvedPaymentStatus,
             paymentStatus: resolvedPaymentStatus,
+            approval_status: resolvedApprovalStatus,
+            approvalStatus: resolvedApprovalStatus,
             subscription_ends_at: resolvedExpiry,
             subscriptionEndsAt: resolvedExpiry,
             expiryDate: resolvedExpiry,
@@ -108,6 +110,7 @@ export function useStartupPlan() {
           setPlanType(cleanTier);
           setStatus(resStatus);
           setPaymentStatus(cachedProfile.payment_status || cachedProfile.paymentStatus || (resStatus === "active" ? "paid" : "pending"));
+          setApprovalStatus(cachedProfile.approval_status || cachedProfile.approvalStatus || (resStatus === "active" || resStatus === "approved" ? "approved" : "pending"));
           setExpiryDate(resExpiry);
           setRequestedPlan(cachedProfile.requested_plan || null);
           setVerificationStatus(cachedProfile.verification_status || null);
@@ -126,6 +129,7 @@ export function useStartupPlan() {
         setPlanType(cleanTier);
         setStatus(resStatus);
         setPaymentStatus(cachedProfile.payment_status || cachedProfile.paymentStatus || (resStatus === "active" ? "paid" : "pending"));
+        setApprovalStatus(cachedProfile.approval_status || cachedProfile.approvalStatus || (resStatus === "active" || resStatus === "approved" ? "approved" : "pending"));
         setExpiryDate(resExpiry);
         setRequestedPlan(cachedProfile.requested_plan || null);
         setVerificationStatus(cachedProfile.verification_status || null);
@@ -157,6 +161,8 @@ export function useStartupPlan() {
     status,
     paymentStatus: effectivePaymentStatus,
     payment_status: effectivePaymentStatus,
+    approvalStatus,
+    approval_status: approvalStatus,
     subscription_ends_at: expiryDate,
     subscriptionEndsAt: expiryDate,
     expiryDate,

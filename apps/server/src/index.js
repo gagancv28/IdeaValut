@@ -893,6 +893,7 @@ app.post('/api/startups/:identifier/upgrade-request', async (req, res) => {
 
   const dbPayload = {
     requested_plan: targetTier,
+    approval_status: 'pending',
     verification_status: 'pending',
     updated_at: new Date().toISOString()
   };
@@ -912,6 +913,7 @@ app.post('/api/startups/:identifier/upgrade-request', async (req, res) => {
     localList[idx] = {
       ...localList[idx],
       requested_plan: targetTier,
+      approval_status: 'pending',
       verification_status: 'pending',
       updated_at: new Date().toISOString()
     };
@@ -988,6 +990,9 @@ app.post('/api/startups', async (req, res) => {
   const validUserId = isValidUUID(userId) ? userId : null;
 
   // Exact Supabase table schema columns
+  const initialTier = req.body.tier || req.body.plan_type || 'Basic';
+  const isBasic = initialTier === 'Basic';
+
   const dbPayload = {
     company_name: name,
     founder_name: founderName,
@@ -1002,8 +1007,10 @@ app.post('/api/startups', async (req, res) => {
     contact_email: contactEmail || email || '',
     phone_number: contactPhone || '',
     additional_contacts: additionalContacts || [],
-    status: 'pending',
-    payment_status: 'pending'
+    status: isBasic ? 'active' : 'pending',
+    approval_status: isBasic ? 'approved' : 'pending',
+    verification_status: isBasic ? 'approved' : 'pending',
+    payment_status: isBasic ? 'paid' : 'pending'
   };
 
   const localPayload = {
@@ -1017,9 +1024,12 @@ app.post('/api/startups', async (req, res) => {
     min_investment: numericMinInvestment,
     description: description || '',
     user_id: userId || null,
-    status: 'pending',
-    tier: 'Basic',
-    plan_type: 'Basic',
+    status: isBasic ? 'active' : 'pending',
+    approval_status: isBasic ? 'approved' : 'pending',
+    verification_status: isBasic ? 'approved' : 'pending',
+    payment_status: isBasic ? 'paid' : 'pending',
+    tier: initialTier,
+    plan_type: initialTier,
     additional_contacts: additionalContacts || null,
     contact_info: {
       email: contactEmail || '',
@@ -1191,6 +1201,8 @@ app.get('/api/startups/:identifier', async (req, res) => {
       subscription_ends_at: startupData.subscription_ends_at || startupData.expiry_date || (isStructuredAC && ac.subscription_ends_at) || (localMatch && (localMatch.subscription_ends_at || localMatch.expiry_date)) || null,
       subscriptionEndsAt: startupData.subscription_ends_at || startupData.expiry_date || (isStructuredAC && ac.subscription_ends_at) || (localMatch && (localMatch.subscription_ends_at || localMatch.expiry_date)) || null,
       requested_plan: startupData.requested_plan || (isStructuredAC && ac.requested_plan) || null,
+      approval_status: startupData.approval_status || (isStructuredAC && ac.approval_status) || startupData.verification_status || (isStructuredAC && ac.verification_status) || (startupData.status === 'active' || startupData.status === 'approved' ? 'approved' : 'pending'),
+      approvalStatus: startupData.approval_status || (isStructuredAC && ac.approval_status) || startupData.verification_status || (isStructuredAC && ac.verification_status) || (startupData.status === 'active' || startupData.status === 'approved' ? 'approved' : 'pending'),
       verification_status: startupData.verification_status || (isStructuredAC && ac.verification_status) || null,
       upgrade_status: startupData.upgrade_status || (isStructuredAC && ac.upgrade_status) || null,
       suspension_reason: startupData.suspension_reason || (isStructuredAC && ac.suspension_reason) || null,
@@ -2084,7 +2096,15 @@ async function handleAdminStatusUpdate(req, res) {
 
   if (req.body.plan_type !== undefined) { dbPayload.plan_type = req.body.plan_type; updatedAC.plan_type = req.body.plan_type; }
   if (req.body.requested_plan !== undefined) { dbPayload.requested_plan = req.body.requested_plan; updatedAC.requested_plan = req.body.requested_plan; }
-  if (req.body.verification_status !== undefined) { dbPayload.verification_status = req.body.verification_status; updatedAC.verification_status = req.body.verification_status; }
+  if (req.body.approval_status !== undefined) { dbPayload.approval_status = req.body.approval_status; updatedAC.approval_status = req.body.approval_status; }
+  if (req.body.verification_status !== undefined) { 
+    dbPayload.verification_status = req.body.verification_status; 
+    updatedAC.verification_status = req.body.verification_status; 
+    if (req.body.verification_status === 'approved') {
+      dbPayload.approval_status = 'approved';
+      updatedAC.approval_status = 'approved';
+    }
+  }
   if (req.body.upgrade_status !== undefined) { updatedAC.upgrade_status = req.body.upgrade_status; }
   if (req.body.suspension_reason !== undefined) { dbPayload.suspension_reason = req.body.suspension_reason; updatedAC.suspension_reason = req.body.suspension_reason; }
   if (req.body.approved_by !== undefined) { dbPayload.approved_by = req.body.approved_by; updatedAC.approved_by = req.body.approved_by; }
@@ -2744,19 +2764,34 @@ app.get('/api/startups', async (req, res) => {
       .from('startups')
       .select('*');
 
+    const isPublishedToDiscover = (s) => {
+      const approval = String(s.approval_status || s.verification_status || (s.status === 'active' || s.status === 'approved' ? 'approved' : 'pending')).toLowerCase().trim();
+      const payment = String(s.payment_status || (s.status === 'active' ? 'paid' : 'pending')).toLowerCase().trim();
+      const tier = String(s.plan_type || s.tier || 'Basic').trim();
+
+      if (tier === 'Basic') {
+        return s.status === 'active' || s.status === 'approved' || (approval === 'approved' && (payment === 'paid' || !s.payment_status));
+      }
+
+      const isApproved = approval === 'approved' || s.status === 'approved' || (s.status === 'active' && payment === 'paid');
+      const isPaid = payment === 'paid' || s.status === 'active';
+
+      return isApproved && isPaid;
+    };
+
     if (!sbResult.error && Array.isArray(sbResult.data) && sbResult.data.length > 0) {
       console.log(`[startups] Fetched ${sbResult.data.length} live startup rows directly from Supabase`);
-      // Filter active or non-expired listings in JS
-      data = sbResult.data.filter(s => !s.status || s.status === 'active' || s.status === 'pending_verification');
+      // Filter published listings (requires approval_status === 'approved' AND payment_status === 'paid' for paid tiers)
+      data = sbResult.data.filter(isPublishedToDiscover);
     } else {
       if (sbResult.error) {
         console.warn('[startups] Supabase fetch error, using local fallback:', sbResult.error.message);
       }
-      data = loadFromLocalDB().filter(s => !s.status || s.status === 'active' || s.status === 'pending_verification');
+      data = loadFromLocalDB().filter(isPublishedToDiscover);
     }
   } catch (err) {
     console.error('[startups] Exception fetching startups from Supabase:', err.message);
-    data = loadFromLocalDB().filter(s => !s.status || s.status === 'active' || s.status === 'pending_verification');
+    data = loadFromLocalDB().filter(isPublishedToDiscover);
   }
 
   const localDbStartups = loadFromLocalDB();
@@ -3583,6 +3618,7 @@ async function runPaymentMigration() {
     const client = getAdminClient();
     // Add columns via RPC if they don't exist (catches gracefully)
     const migrations = [
+      `ALTER TABLE startups ADD COLUMN IF NOT EXISTS approval_status TEXT DEFAULT 'pending'`,
       `ALTER TABLE startups ADD COLUMN IF NOT EXISTS ai_insights JSONB`,
       `ALTER TABLE startups ADD COLUMN IF NOT EXISTS razorpay_order_id TEXT`,
       `ALTER TABLE startups ADD COLUMN IF NOT EXISTS razorpay_payment_id TEXT`,
@@ -3641,6 +3677,32 @@ app.post('/api/payment/create-order', async (req, res) => {
   // Load live prices from platform settings
   const settings = loadSettingsFromLocalDB();
   const amountPaise = getTierAmountPaise(tier, settings);
+
+  // Check if startup is approved by admin before creating Razorpay order for paid tiers
+  try {
+    const client = getAdminClient();
+    const isUUID = isValidUUID(userId);
+    let row = null;
+    if (isUUID) {
+      const { data } = await client.from('startups').select('*').eq('user_id', userId).maybeSingle();
+      row = data;
+    }
+    if (!row) {
+      const localList = loadFromLocalDB();
+      row = localList.find(s => s.user_id === userId || String(s.id) === String(userId));
+    }
+
+    if (row && tier !== 'Basic') {
+      const approval = String(row.approval_status || row.verification_status || (row.status === 'approved' || row.status === 'pending_payment' ? 'approved' : 'pending')).toLowerCase().trim();
+      if (approval !== 'approved' && row.status !== 'pending_payment' && row.status !== 'approved') {
+        return res.status(403).json({
+          error: 'Your profile is pending admin approval. You will be able to complete payment once approved.'
+        });
+      }
+    }
+  } catch (chkErr) {
+    console.warn('[razorpay] Pre-order approval check notice:', chkErr.message);
+  }
 
   if (amountPaise === 0) {
     return res.status(400).json({ error: 'Cannot create a Razorpay order for a free plan. Use Basic plan activation instead.' });
