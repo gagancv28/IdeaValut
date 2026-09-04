@@ -1,0 +1,434 @@
+[
+  {
+    "id": 1,
+    "sender": "gagan",
+    "email": "gaganstudy2428@gmail.com",
+    "company": "Pre-Registration",
+    "subject": "Pre-registration inquiry",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "gagan",
+        "role": "founder",
+        "text": "what is this platform is about",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-07-28T04:38:55.245Z"
+  },
+  {
+    "id": 2,
+    "sender": "gagan",
+    "email": "gagancv3@gmail.com",
+    "company": "Pre-Registration",
+    "subject": "Pre-registration inquiry",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "gagan",
+        "role": "founder",
+        "text": "asdfghjk",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-07-28T05:09:47.398Z"
+  },
+  {
+    "id": 3,
+    "sender": "gagagn",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "company": "Pre-Registration",
+    "subject": "Pre-registration inquiry",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "gagagn",
+        "role": "founder",
+        "text": "fghjkl",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-07-28T05:36:06.491Z"
+  },
+  {
+    "id": 4,
+    "sender": "GAGAN C V",
+    "email": "gaganstudy2428@gmail.com",
+    "company": "Ideavault",
+    "subject": "kj",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "GAGAN C V",
+        "role": "founder",
+        "text": "kj",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-07-28T10:24:59.072Z"
+  },
+  {
+    "id": 5,
+    "sender": "GAGAN C V",
+    "email": "gaganstudy2428@gmail.com",
+    "company": "Ideavault",
+    "subject": "hhh",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "GAGAN C V",
+        "role": "founder",
+        "text": "gggggggggg",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-07-28T12:14:55.368Z"
+  },
+  {
+    "id": 6,
+    "sender": "GAGAN C V",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "company": "D2C ",
+    "subject": "kf",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "GAGAN C V",
+        "role": "founder",
+        "text": "ffkf",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T13:23:10.176Z"
+  },
+  {
+    "id": 7,
+    "sender": "Test Founder",
+    "email": "testquery123@example.com",
+    "company": "TestQueryCompany",
+    "subject": "Verification Question",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Test Founder",
+        "role": "founder",
+        "text": "Hello Admin, is my incorporation certificate valid?",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T13:39:34.105Z"
+  },
+  {
+    "id": 8,
+    "sender": "Test Founder",
+    "email": "testquery123@example.com",
+    "company": "TestQueryCompany",
+    "subject": "Verification Question",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Test Founder",
+        "role": "founder",
+        "text": "Hello Admin, is my incorporation certificate valid?",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T13:39:34.479Z"
+  },
+  {
+    "id": 9,
+    "sender": "Test Founder",
+    "email": "testquery123@example.com",
+    "company": "TestQueryCompany",
+    "subject": "Verification Question",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Test Founder",
+        "role": "founder",
+        "text": "Hello Admin, is my incorporation certificate valid?",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T13:40:34.406Z"
+  },
+  {
+    "id": 10,
+    "sender": "Test Founder",
+    "email": "testquery123@example.com",
+    "company": "TestQueryCompany",
+    "subject": "Verification Question",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Test Founder",
+        "role": "founder",
+        "text": "Hello Admin, is my incorporation certificate valid?",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T13:40:34.618Z"
+  },
+  {
+    "id": 11,
+    "sender": "Verify Once Founder",
+    "email": "verifyonce987@example.com",
+    "company": "VerifyOnceCompany",
+    "subject": "Double click test",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Verify Once Founder",
+        "role": "founder",
+        "text": "Hello, testing double-click issue",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T13:51:48.434Z"
+  },
+  {
+    "id": 12,
+    "sender": "Verify Once Founder",
+    "email": "verifyonce987@example.com",
+    "company": "VerifyOnceCompany",
+    "subject": "Double click test",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Verify Once Founder",
+        "role": "founder",
+        "text": "Hello, testing double-click issue",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T13:53:29.267Z"
+  },
+  {
+    "id": 13,
+    "sender": "GAGAN C V",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "company": "D2C ",
+    "subject": "cvbn",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "GAGAN C V",
+        "role": "founder",
+        "text": "cvb",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T13:58:27.441Z"
+  },
+  {
+    "id": 14,
+    "sender": "GAGAN C V",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "company": "D2C ",
+    "subject": "cvbn",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "GAGAN C V",
+        "role": "founder",
+        "text": "cvbn",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T13:59:14.681Z"
+  },
+  {
+    "id": 15,
+    "sender": "GAGAN C V",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "company": "D2C ",
+    "subject": "vbncvb",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "GAGAN C V",
+        "role": "founder",
+        "text": "dfghjk",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T14:01:05.512Z"
+  },
+  {
+    "id": 16,
+    "sender": "bnm",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "company": "Pre-Registration",
+    "subject": "Pre-registration inquiry",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "bnm",
+        "role": "founder",
+        "text": "xcvbn",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T14:01:35.446Z"
+  },
+  {
+    "id": 17,
+    "sender": "Test Founder",
+    "email": "test@test.com",
+    "company": "Test Startup",
+    "subject": "Test Support Subject",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Test Founder",
+        "role": "founder",
+        "text": "Test Support Message Description",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T14:09:55.041Z"
+  },
+  {
+    "id": 18,
+    "sender": "Test Founder",
+    "email": "test@test.com",
+    "company": "Test Startup",
+    "subject": "Test Support Subject",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Test Founder",
+        "role": "founder",
+        "text": "Test Support Message Description",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T14:11:02.305Z"
+  },
+  {
+    "id": 19,
+    "sender": "Test Founder",
+    "email": "test@test.com",
+    "company": "Test Startup",
+    "subject": "Test Support Subject",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Test Founder",
+        "role": "founder",
+        "text": "Test Support Message Description",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T14:11:28.280Z"
+  },
+  {
+    "id": 20,
+    "sender": "A",
+    "email": "invalid-email",
+    "company": "Client Dashboard",
+    "subject": "B",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "A",
+        "role": "founder",
+        "text": "C",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T14:12:25.484Z"
+  },
+  {
+    "id": 21,
+    "sender": "Test Founder",
+    "email": "test@test.com",
+    "company": "Test Startup",
+    "subject": "Test Support Subject",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Test Founder",
+        "role": "founder",
+        "text": "Test Support Message Description",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T14:12:54.286Z"
+  },
+  {
+    "id": 22,
+    "sender": "Test Founder",
+    "email": "test@test.com",
+    "company": "Test Startup",
+    "subject": "Reload test",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "Test Founder",
+        "role": "founder",
+        "text": "Checking reload",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T14:15:39.723Z"
+  },
+  {
+    "id": 23,
+    "sender": "vbn",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "company": "Pre-Registration",
+    "subject": "Pre-registration inquiry",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "vbn",
+        "role": "founder",
+        "text": "dfghj",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T14:16:54.594Z"
+  },
+  {
+    "id": 24,
+    "sender": "GAGAN C V",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "company": "D2C ",
+    "subject": "cv",
+    "category": "Technical",
+    "unread": true,
+    "messages": [
+      {
+        "sender": "GAGAN C V",
+        "role": "founder",
+        "text": "vb",
+        "time": "Just now"
+      }
+    ],
+    "created_at": "2026-08-18T15:46:26.762Z"
+  }
+]

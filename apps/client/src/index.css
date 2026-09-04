@@ -1,0 +1,657 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CSS Custom Properties — Permanently Light Mode
+   Dark mode has been disabled. :root holds light values directly.
+   ───────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg:          #f8fafc;
+  --bg-deep:     #f1f5f9;
+  --bg-sidebar:  #ffffff;
+  --bg-card:     #ffffff;
+  --bg-elevated: #f8fafc;
+  --bg-input:    rgba(255, 255, 255, 0.95);
+  --bg-navbar:   rgba(255, 255, 255, 0.95);
+  --bg-hover:    rgba(241, 245, 249, 0.8);
+  --bg-hero:     linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f8fafc 100%);
+  --bg-onboard-hero: linear-gradient(135deg, #f8fafc 0%, #f0f4ff 60%, #f8fafc 100%);
+  --bg-file-drop:  rgba(248, 250, 252, 0.8);
+
+  /* Text */
+  --text-1:   #0f172a;
+  --text-2:   #1e293b;
+  --text-3:   #475569;
+  --text-4:   #94a3b8;
+
+  /* Borders */
+  --border-1:  #e2e8f0;
+  --border-2:  rgba(203, 213, 225, 0.6);
+
+  /* Brand Accent */
+  --brand:      #4f46e5;
+  --brand-dark: #3730a3;
+  --brand-text: #ffffff;
+  --neon:       #4f46e5;
+  --neon-text:  #4f46e5;     /* accent for text labels */
+
+  /* Shimmer */
+  --shimmer-a: #e2e8f0;
+  --shimmer-b: #f1f5f9;
+
+  /* Shadow */
+  --shadow-card:       0 4px 24px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 12px 40px rgba(0,0,0,0.12);
+  /* Hero highlight */
+  --hero-highlight-bg: #0f172a;
+  --hero-highlight-text: #ffffff;
+  --hero-highlight-shadow: 0 20px 36px rgba(15,23,42,0.10);
+}
+
+/* ── Light Mode Overrides ───────────────────────────────────────────────────── */
+html.light {
+  --bg:          #f8fafc;
+  --bg-deep:     #f1f5f9;
+  --bg-sidebar:  #ffffff;
+  --bg-card:     #ffffff;
+  --bg-elevated: #f8fafc;
+  --bg-input:    rgba(255, 255, 255, 0.95);
+  --bg-navbar:   rgba(255, 255, 255, 0.95);
+  --bg-hover:    rgba(241, 245, 249, 0.8);
+  --bg-hero:     linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #f8fafc 100%);
+  --bg-onboard-hero: linear-gradient(135deg, #f8fafc 0%, #f0f4ff 60%, #f8fafc 100%);
+  --bg-file-drop:  rgba(248, 250, 252, 0.8);
+
+  --text-1:   #0f172a;
+  --text-2:   #1e293b;
+  --text-3:   #475569;
+  --text-4:   #94a3b8;
+
+  --border-1:  #e2e8f0;
+  --border-2:  rgba(203, 213, 225, 0.6);
+
+  --neon:      #4f46e5;
+  --neon-text: #4f46e5;     /* brand accent for text labels on white */
+
+  --shimmer-a: #e2e8f0;
+  --shimmer-b: #f1f5f9;
+
+  --shadow-card:       0 4px 24px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 12px 40px rgba(0,0,0,0.12);
+  /* Light-mode hero highlight overrides */
+  --hero-highlight-bg: #0f172a;
+  --hero-highlight-text: #ffffff;
+  --hero-highlight-shadow: 0 20px 36px rgba(15,23,42,0.10);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Global Base
+   ───────────────────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Smooth theme transitions on every element */
+    transition: background-color 0.35s ease;
+  }
+
+  /* Propagate smooth transitions to all meaningful elements */
+  body, div, section, aside, nav, header, footer, main, article,
+  button, input, select, textarea, label, span, p, h1, h2, h3, h4, a {
+    transition:
+      background-color 0.35s ease,
+      border-color 0.35s ease,
+      color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: var(--bg);
+    color: var(--text-1);
+  }
+
+  html.light body {
+    color: var(--text-1);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--border-1);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(79, 70, 229, 0.45);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Components
+   ───────────────────────────────────────────────────────────────────────────── */
+@layer components {
+  /* Neon Glow Border */
+  .neon-border {
+    border: 1px solid rgba(79, 70, 229, 0.5);
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.18), inset 0 0 20px rgba(79, 70, 229, 0.08);
+  }
+
+  .neon-border-sm {
+    border: 1px solid rgba(79, 70, 229, 0.3);
+    box-shadow: 0 0 10px rgba(79, 70, 229, 0.1);
+  }
+
+
+
+
+
+  /* Card Base — uses CSS variables so it responds to theme */
+  .startup-card {
+    @apply relative rounded-2xl p-5 transition-all duration-300 cursor-pointer overflow-hidden;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-1);
+    box-shadow: var(--shadow-card);
+  }
+
+  html.light .startup-card {
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .startup-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-2);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  html.light .startup-card:hover {
+    border-color: #cbd5e1;
+  }
+
+  /* quick-view removed — no hover action shown on cards */
+
+  .startup-card.spotlight {
+    border: 2px solid #fbbf24;
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.3), var(--shadow-card);
+    background-color: rgba(251, 191, 36, 0.03);
+  }
+
+  .startup-card.spotlight:hover {
+    box-shadow: 0 0 25px rgba(251, 191, 36, 0.5), var(--shadow-card-hover);
+    border-color: #f59e0b;
+    transform: translateY(-3px);
+  }
+
+  html.light .startup-card.spotlight {
+    background-color: rgba(251, 191, 36, 0.08);
+  }
+
+  /* Gradient Overlay on cards */
+  .card-glow-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4f46e5, transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .startup-card.spotlight .card-glow-overlay {
+    opacity: 1;
+  }
+
+  .startup-card:hover .card-glow-overlay {
+    opacity: 1;
+  }
+
+  /* Tag Styles */
+  .tag {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  /* Metric action (Connect) — clearer default + vibrant hover */
+  .metric-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 0.75rem;
+    background: rgba(79,70,229,0.08);
+    border: 1px solid rgba(79,70,229,0.12);
+    color: var(--brand);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  }
+
+  .metric-action svg { opacity: 0.9; }
+
+  .metric-action:hover {
+    background: linear-gradient(90deg, var(--brand), var(--brand-dark));
+    color: var(--brand-text);
+    border-color: rgba(79,70,229,0.45);
+    box-shadow: 0 14px 40px rgba(79,70,229,0.18);
+    transform: translateY(-4px);
+  }
+
+  .metric-action:focus-visible {
+    outline: 3px solid rgba(79,70,229,0.14);
+    outline-offset: 2px;
+  }
+
+  .tag-industry {
+    background-color: var(--bg-hover);
+    color: var(--text-2);
+    border: 1px solid var(--border-2);
+  }
+
+  .tag-neon {
+    background: rgba(79, 70, 229, 0.12);
+    color: var(--neon-text);
+    border: 1px solid rgba(79, 70, 229, 0.25);
+  }
+
+  .tag-stage {
+    @apply bg-blue-500/10 text-blue-400 border border-blue-500/20;
+  }
+
+  html.light .tag-stage {
+    background-color: rgba(59, 130, 246, 0.08);
+    color: #1d4ed8;
+    border-color: rgba(59, 130, 246, 0.2);
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200;
+    background: #4f46e5;
+    color: #ffffff;
+  }
+
+  .btn-primary:hover {
+    background: #4338ca;
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.35);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200;
+    border: 1px solid var(--border-1);
+    color: var(--text-3);
+    background-color: var(--bg-input);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--border-2);
+    color: var(--text-1);
+    background-color: var(--bg-hover);
+  }
+
+  /* Pricing Card */
+  .pricing-card {
+    @apply relative rounded-2xl p-8 flex flex-col transition-all duration-300;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-1);
+  }
+
+  .pricing-card.featured {
+    border: 1px solid rgba(79, 70, 229, 0.4);
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
+    box-shadow: 0 0 40px rgba(79, 70, 229, 0.12);
+    transform: scale(1.04);
+  }
+
+  /* Input Styles */
+  .form-input {
+    @apply w-full rounded-xl px-4 py-2.5 text-sm transition-all duration-200 outline-none;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+  }
+
+  .form-input:focus {
+    background-color: #ffffff;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+  }
+
+  .form-input::placeholder {
+    color: #94a3b8;
+  }
+
+  /* Checkbox */
+  .custom-checkbox {
+    @apply w-4 h-4 rounded border-2 transition-all duration-150 cursor-pointer flex-shrink-0;
+    background-color: var(--bg-input);
+    border-color: var(--border-1);
+  }
+
+  .custom-checkbox:checked {
+    background: #4f46e5;
+    border-color: #4f46e5;
+  }
+
+  /* Metric Bar */
+  .metric-bar {
+    @apply flex items-center justify-between pt-4 mt-4;
+    border-top: 1px solid var(--border-2);
+  }
+
+  .metric-item {
+    @apply flex flex-col gap-0.5;
+  }
+
+  /* metric-action handled above */
+
+  .metric-label {
+    @apply text-xs font-medium uppercase tracking-wider;
+    color: var(--text-4);
+  }
+
+  .metric-value {
+    @apply text-sm font-bold;
+    color: var(--text-1);
+  }
+
+  /* Admin Styles */
+  .admin-sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer;
+    color: var(--text-3);
+  }
+
+  .admin-sidebar-item:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-2);
+  }
+
+  .admin-sidebar-item.active {
+    background: rgba(79, 70, 229, 0.08);
+    color: #4f46e5;
+    border: 1px solid rgba(79, 70, 229, 0.15);
+  }
+
+  html.light .admin-sidebar-item.active {
+    background: rgba(79, 70, 229, 0.08);
+    color: #4f46e5;
+    border-color: rgba(79, 70, 229, 0.2);
+  }
+
+  /* Shimmer loading effect — uses CSS variables */
+  .shimmer {
+    background: linear-gradient(90deg, var(--shimmer-a) 25%, var(--shimmer-b) 50%, var(--shimmer-a) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes fadeInUp {
+    0%   { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Utilities
+   ───────────────────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-neon {
+    color: var(--neon-text);
+  }
+
+  /* Theme-aware text utilities */
+  .text-theme-1 { color: var(--text-1); }
+  .text-theme-2 { color: var(--text-2); }
+  .text-theme-3 { color: var(--text-3); }
+
+  /* Theme-aware background / border utilities */
+  .bg-theme-card { background-color: var(--bg-card); }
+  .bg-theme-hero { background: var(--bg-hero); }
+  .border-theme-1 { border-color: var(--border-1); }
+
+  .bg-neon {
+    background: #4f46e5;
+  }
+
+  .border-neon {
+    border-color: rgba(79, 70, 229, 0.4);
+  }
+
+  .hero-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 9999px;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.22);
+    color: #10b981;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .hero-highlight {
+    background: var(--hero-highlight-bg);
+    color: var(--hero-highlight-text);
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: var(--hero-highlight-shadow);
+    font-size: inherit; /* ensure it scales with heading */
+    line-height: 1;
+  }
+
+  .ticker-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-1);
+    box-shadow: var(--shadow-card);
+  }
+
+  .ticker-panel .text-indigo-400 {
+    color: var(--brand);
+  }
+
+  .ticker-track {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .ticker-items {
+    display: inline-flex;
+    gap: 2.5rem;
+    padding-left: 1rem;
+    min-width: 200%;
+    animation: ticker-scroll 20s linear infinite;
+  }
+
+  /* Subtle grid pattern used in hero backgrounds */
+  .bg-grid-pattern {
+    background-image: radial-gradient(rgba(255,255,255,0.02) 0.5px, transparent 0.5px), radial-gradient(rgba(255,255,255,0.02) 0.5px, transparent 0.5px);
+    background-position: 0 0, 10px 10px;
+    background-size: 20px 20px, 20px 20px;
+    background-repeat: repeat;
+    mix-blend-mode: overlay;
+  }
+
+  @keyframes ticker-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .sort-pill {
+    font-size: 0.75rem;
+    padding: 0.375rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #cbd5e1;
+    background: #f1f5f9;
+    color: #475569;
+    transition: all 0.2s ease;
+  }
+
+  .sort-pill:hover {
+    background: rgba(79, 70, 229, 0.08);
+    color: #4f46e5;
+    border-color: rgba(79, 70, 229, 0.3);
+  }
+
+  .sort-pill.active {
+    background: #4f46e5;
+    color: #ffffff;
+    border-color: #4338ca;
+  }
+
+  .nav-link {
+    transition: all 0.2s ease;
+  }
+
+  .nav-link.inactive:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-link.active {
+    box-shadow: 0 12px 30px rgba(79, 70, 229, 0.15);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px rgba(79, 70, 229, 0.35);
+  }
+
+  html.light .glow-text {
+    text-shadow: 0 0 20px rgba(79, 70, 229, 0.2);
+  }
+
+  /* ── Filter Sidebar ─────────────────────────────────────────────────────────
+     Self-contained theming for the Discover page filter panel.
+     Default (dark mode) uses deep navy; html.light overrides to off-white.
+  ─────────────────────────────────────────────────────────────────────────── */
+  .filter-sidebar-panel {
+    background-color: #111827;     /* dark navy default */
+    border: 1px solid #1e293b;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    color: #e2e8f0;
+  }
+
+  html.light .filter-sidebar-panel {
+    background-color: #f8f9fa;     /* clean off-white */
+    border-color: #e2e8f0;
+    color: #1e293b;
+  }
+
+  .filter-sidebar-panel .filter-section-divider {
+    border-color: #1e293b;
+  }
+
+  html.light .filter-sidebar-panel .filter-section-divider {
+    border-color: #e2e8f0;
+  }
+
+  .filter-sidebar-panel .filter-label-header {
+    color: #94a3b8;
+  }
+
+  html.light .filter-sidebar-panel .filter-label-header {
+    color: #1e293b;
+    font-weight: 700;
+  }
+
+  .filter-sidebar-panel .filter-label-item {
+    color: #94a3b8;
+  }
+
+  html.light .filter-sidebar-panel .filter-label-item {
+    color: #475569;
+  }
+
+  .filter-sidebar-panel .filter-label-item:hover {
+    color: #ffffff;
+  }
+
+  html.light .filter-sidebar-panel .filter-label-item:hover {
+    color: #0f172a;
+  }
+
+  .filter-sidebar-panel .filter-label-item.active {
+    color: #818cf8;
+    font-weight: 600;
+  }
+
+  html.light .filter-sidebar-panel .filter-label-item.active {
+    color: #4f46e5;
+    font-weight: 600;
+  }
+
+  /* Sort pills — light mode fix */
+  html.light .sort-pill {
+    background: #f1f5f9;
+    color: #475569;
+    border-color: #cbd5e1;
+  }
+
+  html.light .sort-pill:hover {
+    background: rgba(79, 70, 229, 0.08);
+    color: #4f46e5;
+    border-color: rgba(79, 70, 229, 0.3);
+  }
+
+  html.light .sort-pill.active {
+    background: #4f46e5;
+    color: #ffffff;
+    border-color: #4338ca;
+  }
+
+  /* Dark mode sidebar icon badge & chip overrides */
+  html.dark .filter-sidebar-panel .bg-indigo-50 {
+    background-color: rgba(79, 70, 229, 0.12) !important;
+  }
+  html.dark .filter-sidebar-panel .border-indigo-200 {
+    border-color: rgba(79, 70, 229, 0.3) !important;
+  }
+  html.dark .filter-sidebar-panel .text-indigo-600 {
+    color: #818cf8 !important;
+  }
+  html.dark .filter-sidebar-panel .text-indigo-700 {
+    color: #a5b4fc !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Form validation visual highlights
+   ───────────────────────────────────────────────────────────────────────────── */
+form.was-validated input:invalid, 
+form.was-validated select:invalid, 
+form.was-validated textarea:invalid {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.05) !important;
+}
+
+form.was-validated input:invalid:focus, 
+form.was-validated select:invalid:focus, 
+form.was-validated textarea:invalid:focus {
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25) !important;
+}
+

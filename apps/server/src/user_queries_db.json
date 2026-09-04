@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "name": "gagan",
+    "email": "gaganstudy2428@gmail.com",
+    "message": "what is this platform is about",
+    "unread": true,
+    "created_at": "2026-07-28T04:38:55.175Z"
+  },
+  {
+    "id": 2,
+    "name": "gagan",
+    "email": "gagancv3@gmail.com",
+    "message": "asdfghjk",
+    "unread": true,
+    "created_at": "2026-07-28T05:09:47.230Z"
+  },
+  {
+    "id": 3,
+    "name": "gagagn",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "message": "fghjkl",
+    "unread": true,
+    "created_at": "2026-07-28T05:36:06.416Z"
+  },
+  {
+    "id": 4,
+    "name": "GAGAN C V",
+    "email": "gaganstudy2428@gmail.com",
+    "message": "[kj] kj",
+    "unread": true,
+    "created_at": "2026-07-28T10:24:59.000Z"
+  },
+  {
+    "id": 5,
+    "name": "GAGAN C V",
+    "email": "gaganstudy2428@gmail.com",
+    "message": "[hhh] gggggggggg",
+    "unread": true,
+    "created_at": "2026-07-28T12:14:55.314Z"
+  },
+  {
+    "id": 6,
+    "name": "GAGAN C V",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "message": "[kf] ffkf",
+    "unread": true,
+    "created_at": "2026-08-18T13:23:10.007Z"
+  },
+  {
+    "id": 7,
+    "name": "Test Founder",
+    "email": "testquery123@example.com",
+    "message": "[Verification Question] Hello Admin, is my incorporation certificate valid?",
+    "unread": true,
+    "created_at": "2026-08-18T13:39:34.041Z"
+  },
+  {
+    "id": 8,
+    "name": "Test Founder",
+    "email": "testquery123@example.com",
+    "message": "[Verification Question] Hello Admin, is my incorporation certificate valid?",
+    "unread": true,
+    "created_at": "2026-08-18T13:39:34.140Z"
+  },
+  {
+    "id": 9,
+    "name": "Test Founder",
+    "email": "testquery123@example.com",
+    "message": "[Verification Question] Hello Admin, is my incorporation certificate valid?",
+    "unread": true,
+    "created_at": "2026-08-18T13:40:34.307Z"
+  },
+  {
+    "id": 10,
+    "name": "Test Founder",
+    "email": "testquery123@example.com",
+    "message": "[Verification Question] Hello Admin, is my incorporation certificate valid?",
+    "unread": true,
+    "created_at": "2026-08-18T13:40:34.419Z"
+  },
+  {
+    "id": 11,
+    "name": "Verify Once Founder",
+    "email": "verifyonce987@example.com",
+    "message": "[Double click test] Hello, testing double-click issue",
+    "unread": true,
+    "created_at": "2026-08-18T13:51:48.369Z"
+  },
+  {
+    "id": 12,
+    "name": "Verify Once Founder",
+    "email": "verifyonce987@example.com",
+    "message": "[Double click test] Hello, testing double-click issue",
+    "unread": true,
+    "created_at": "2026-08-18T13:53:29.208Z"
+  },
+  {
+    "id": 13,
+    "name": "GAGAN C V",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "message": "[cvbn] cvb",
+    "unread": true,
+    "created_at": "2026-08-18T13:58:27.388Z"
+  },
+  {
+    "id": 14,
+    "name": "GAGAN C V",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "message": "[cvbn] cvbn",
+    "unread": true,
+    "created_at": "2026-08-18T13:59:14.632Z"
+  },
+  {
+    "id": 15,
+    "name": "GAGAN C V",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "message": "[vbncvb] dfghjk",
+    "unread": true,
+    "created_at": "2026-08-18T14:01:05.330Z"
+  },
+  {
+    "id": 16,
+    "name": "bnm",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "message": "xcvbn",
+    "unread": true,
+    "created_at": "2026-08-18T14:01:35.287Z"
+  },
+  {
+    "id": 17,
+    "name": "Test Founder",
+    "email": "test@test.com",
+    "message": "[Test Support Subject] Test Support Message Description",
+    "unread": true,
+    "created_at": "2026-08-18T14:09:54.789Z"
+  },
+  {
+    "id": 18,
+    "name": "Test Founder",
+    "email": "test@test.com",
+    "message": "[Test Support Subject] Test Support Message Description",
+    "unread": true,
+    "created_at": "2026-08-18T14:11:01.905Z"
+  },
+  {
+    "id": 19,
+    "name": "Test Founder",
+    "email": "test@test.com",
+    "message": "[Test Support Subject] Test Support Message Description",
+    "unread": true,
+    "created_at": "2026-08-18T14:11:27.858Z"
+  },
+  {
+    "id": 20,
+    "name": "A",
+    "email": "invalid-email",
+    "message": "[B] C",
+    "unread": true,
+    "created_at": "2026-08-18T14:12:25.301Z"
+  },
+  {
+    "id": 21,
+    "name": "Test Founder",
+    "email": "test@test.com",
+    "message": "[Test Support Subject] Test Support Message Description",
+    "unread": true,
+    "created_at": "2026-08-18T14:12:54.226Z"
+  },
+  {
+    "id": 22,
+    "name": "Test Founder",
+    "email": "test@test.com",
+    "message": "[Reload test] Checking reload",
+    "unread": true,
+    "created_at": "2026-08-18T14:15:39.540Z"
+  },
+  {
+    "id": 23,
+    "name": "vbn",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "message": "dfghj",
+    "unread": true,
+    "created_at": "2026-08-18T14:16:54.493Z"
+  },
+  {
+    "id": 24,
+    "name": "GAGAN C V",
+    "email": "2102508567@svyasa-sas.edu.in",
+    "message": "[cv] vb",
+    "unread": true,
+    "created_at": "2026-08-18T15:46:26.697Z"
+  }
+]

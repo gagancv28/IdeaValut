@@ -1,0 +1,42 @@
+{
+  "basic_price_inr": "2499",
+  "basic_price_usd": "49",
+  "pro_price_inr": "9999",
+  "pro_price_usd": "129",
+  "spotlight_price_inr": "24999",
+  "spotlight_price_usd": "300",
+  "maintenance_mode": false,
+  "gateway_key": "sk_live_51Oz...z8R9",
+  "llm_key": "g-ai-model-3f...9sK",
+  "strict_gst": false,
+  "sla_target": "48",
+  "team": [
+    {
+      "id": "751ed127-7f57-4ac7-98ea-ac4bedf35a4b",
+      "name": "Super Admin",
+      "email": "admin@ideavault.in",
+      "role": "Super Admin",
+      "created_at": "2026-07-26T17:21:02.881952+00:00",
+      "timezone": "Asia/Kolkata",
+      "default_landing_page": "/overview"
+    },
+    {
+      "id": "9dec5b81-a941-4b04-8ed9-4f4bebc6c415",
+      "name": "Gagan CV",
+      "email": "gagancvcm28@gmail.com",
+      "role": "Moderator",
+      "created_at": "2026-07-26T17:33:00.065213+00:00",
+      "timezone": "Asia/Kolkata",
+      "default_landing_page": "/overview"
+    },
+    {
+      "id": "d8089603-65d0-4717-a7a0-5af030127b7d",
+      "name": "gagancv",
+      "email": "gagancv3@gmail.com",
+      "role": "Super Admin",
+      "created_at": "2026-07-27T11:29:38.043971+00:00",
+      "timezone": "Asia/Kolkata",
+      "default_landing_page": "/overview"
+    }
+  ]
+}
